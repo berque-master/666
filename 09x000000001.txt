@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Directory containing the files
+DIR="X"
+# Change to target directory
+cd "$DIR" || { echo "Directory not found: $DIR"; exit 1; }
+
+# Counter for naming
+counter=1
+
+# Loop over sorted list of files (excluding directories)
+for file in *; do
+    if [[ -f "$file" ]]; then
+        # Format number to 8 digits
+        number=$(printf "%08d" $counter)
+        new_name="08x$number"
+
+        # Check if the new name already exists to avoid overwriting
+        if [[ -e "$new_name" ]]; then
+            echo "Error: File $new_name already exists. Aborting." >&2
+            exit 2
+        fi
+
+        # Rename and output mapping
+        echo "$file,$new_name"
+        mv -- "$file" "$new_name"
+
+        ((counter++))
+    fi
+done
