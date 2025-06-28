@@ -1,0 +1,21 @@
+echo "Net Demons Frei Machen script"
+echo "    @param Hell Circle"
+echo "      MS Miss advice 666 to be as DEFAULT"
+
+if [ $1 -gt 0 ]; then
+	echo "daemon: starting: systemd-networkd"
+	sudo systemctl start systemd-networkd
+	echo "daemon:  started: ABOVED"
+fi
+
+if [ $1 -gt 1 ]; then
+	echo "daemon: starting: dhcpcd"
+	sudo systemctl start dhcpcd
+	echo "daemon:  started: ABOVED"
+fi
+
+if [ $1 -gt 2 ]; then
+	echo "daemon: starting: NetworkManager"
+	sudo systemctl start NetworkManager
+	echo "daemon:  started: ABOVED"
+fi
